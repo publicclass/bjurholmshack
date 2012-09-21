@@ -57,18 +57,12 @@ html
         li Simon Gagner
         li Emil Berner
         li Oliver Nelson
-        li.free 
-          span (vakant)
-        li.free 
-          span (vakant)
-        li.free 
-          span (vakant)
-        li.free 
-          span (vakant)
-        li.free 
-          span (vakant)
-        li.free 
-          span (vakant)
+        li.free: span (vakant)
+        li.free: span (vakant)
+        li.free: span (vakant)
+        li.free: span (vakant)
+        li.free: span (vakant)
+        li.free: span (vakant)
 
     section#where
       h1 Vart? 
@@ -98,23 +92,27 @@ html
           a(href='http://publicclass.se')
             img(src='http://publicclass.s3.amazonaws.com/bjurholmslan/pc-smile.png', alt='Public Class', title="Public Class")
 
-
-    script(src='http://code.jquery.com/jquery-1.8.1.min.js')
     script
-      $('section').each( function(){
-        var bg = $('<div class="bg"/>')
-        $(this).prepend(bg);
-      })
-      var arr = "2012-10-12 17:00:00".split(/[- :]/),
-      date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
+      var frag = document.createDocumentFragment()
+        , temp = document.createElement('div');
+      temp.className = 'bg';
+      frag.appendChild(temp);
 
-      setInterval( function(){
-          var t = ( date - new Date() ) / 1000;
+      var sections = document.querySelectorAll('section');
+      for( var i=0; i < sections.length; i++ )
+        sections[i].insertBefore(frag.cloneNode(true),sections[i].firstChild);
+
+      var arr = "2012-10-12 17:00:00".split(/[- :]/)
+        , date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
+
+      var time = document.getElementById('time').lastChild;
+      setInterval(function(){
+          var t = (date - new Date()) / 1000;
           t = t.toFixed(2).split('.');
           var te = '<span class="milli">'+t[0]+'</span>' + '<span class="period">.</span><span class="deci">' + t[1] + '</span>';
           while( t.length < 13 ) {
             te = '0'+te;
             t = '0'+t;
           }
-          $('#time time').html(te);
+          time.innerHTML = te;
       }, 10)
