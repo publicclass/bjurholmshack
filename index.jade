@@ -78,7 +78,7 @@ html
 
     section#time
       h1 Time left &amp; counting
-      time(datetime='2012-10-12T17:00+02:00') 0000
+      time(datetime='2012-10-12T15:00+02:00') 0000
 
     footer
       h4 Bjurholms(P)LAN! - proudly presented &amp; sponsored by:
@@ -103,7 +103,7 @@ html
       for( var i=0; i < sections.length; i++ )
         sections[i].insertBefore(frag.cloneNode(true),sections[i].firstChild);
 
-      var arr = "2012-10-12 17:00:00".split(/[- :]/)
+      var arr = "2012-10-12 15:00:00".split(/[- :]/)
         , date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
 
       var time = document.getElementById('time').lastChild;
